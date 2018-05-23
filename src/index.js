@@ -1,12 +1,14 @@
 // React
 import React from 'react';
 import ReactDOM from 'react-dom';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Styles
 import './css/index.css';
 
 // Component
-import App from './App';
+import WeatherApp from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // Redux
@@ -25,7 +27,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <WeatherApp />
   </Provider>,
   document.getElementById('root')
 );

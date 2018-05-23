@@ -1,4 +1,4 @@
-# Weather App
+# A React Weather App
 
 *Skills:* React, Redux, SCSS, isomorphic fetch, webpack.
 
