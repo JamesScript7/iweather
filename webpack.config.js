@@ -7,6 +7,13 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body'
 });
 
+// To be able to use .env file
+const webpack = require('webpack');
+const myEnv = require('dotenv').config();
+const myEnvPluginConfig = new webpack.DefinePlugin({
+  REACT_APP_API_KEY: JSON.stringify(myEnv.parsed.REACT_APP_API_KEY)
+});
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -14,26 +21,35 @@ module.exports = {
     filename: 'index_bundle.js'
   },
   module: {
-    rules: [
-      {
-        test:/\.css$/,
-        use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-          { loader: "sass-loader" }
-        ]
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: "babel-loader"
-      },
-      {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        use: "babel-loader"
+    rules: [{
+      test:/\.css$/,
+      use: [
+        { loader: "style-loader" },
+        { loader: "css-loader" },
+        { loader: "sass-loader" }
+      ]
+    },
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: "babel-loader",
+      query: {
+    	  presets: ['es2015', 'react'],
+        plugins: ["transform-object-rest-spread"]
       }
-    ]
+    },
+    {
+      test: /\.jsx$/,
+      exclude: /node_modules/,
+      loader: "babel-loader",
+      query: {
+        presets: ['es2015', 'react'],
+        plugins: ["transform-object-rest-spread"]
+      }
+    }]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [
+    HtmlWebpackPluginConfig,
+    myEnvPluginConfig
+  ]
 }

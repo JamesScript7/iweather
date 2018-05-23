@@ -1,28 +1,29 @@
+// import fetch from 'isomorphic-fetch';
 export const LOAD_WEATHER = 'LOAD_WEATHER';
 export const LOAD_FAIL = 'LOAD_FAIL';
 
-import fetch from 'isomorphic-fetch';
-
 export const loadWeather = (param, dispatch) => {
   const paramVal = param;
-  const key = process.env.API_KEY
+  const key = process.env.REACT_APP_API_KEY;
 
-  console.log(key);
-
-/*
   return dispatch => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?id=${524901}&APPID=${key}`)
-    .then(res => {
-      console.log(res);
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${paramVal}&APPID=${key}`)
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+      return {
+        type: LOAD_WEATHER,
+        payload: resJson
+      }
     })
     .catch(err => {
       return dispatch => {
         dispatch({
           type: LOAD_FAIL,
-          data: true
+          payload: true
         });
       }
     });
   }
-*/
+
 }

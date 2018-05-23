@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { loadWeather } from './actions';
+import { connect } from 'react-redux';
 
 // Styles
 import './css/App.css';
 
 class App extends Component {
+
   handleSubmit(e) {
-    console.log(e);
+    e.preventDefault();
+    const inputVal = e.target.city.value;
+
+    this.props.loadWeather(inputVal);
   }
+
   render() {
     return (
       <div className="App">
@@ -15,7 +21,7 @@ class App extends Component {
           <h1 className="App-title">Get The Current Weather</h1>
         </header>
 
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+        <form className="city-form" onSubmit={(e) => this.handleSubmit(e)}>
           <label htmlFor="city"></label>
           <input
             id="city"
