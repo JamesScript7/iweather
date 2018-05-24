@@ -17,6 +17,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
     "react": "react-scripts start",
+    "dev": "webpack-dev-server --content-base dist",
     "sass": "sass --watch ./src/scss:css",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

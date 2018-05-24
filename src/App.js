@@ -6,15 +6,39 @@ import { connect } from 'react-redux';
 import './css/App.css';
 
 class App extends Component {
-
   handleSubmit(e) {
     e.preventDefault();
     const inputVal = e.target.city.value;
 
     this.props.loadWeather(inputVal);
   }
+  getData() {
+    const data = JSON.parse(localStorage.getItem('weather'));
+    console.log('getData: ', data);
+    // console.log(data.weather[0].description);
 
+    // Display: name, temp, description, id, icon,
+
+    // Data comes in Kelvin??
+    // console.log(this.props.data[0].name);
+    // console.log(this.props.data[0].weather[0].description);
+  }
+  componentDidMount() {
+    // check to see if weather is in localStorage
+    // if so then update the page with the last data
+
+  }
+  componentWillUnmount() {
+    // This doesn't really remove weather from localStorage!!
+
+    // To remove all keys:
+    // localStorage.clear();
+    localStorage.removeItem('weather');
+  }
   render() {
+    // Handle incoming props.
+    console.log(this.props.data);
+
     return (
       <div className="App">
         <header className="App-header">
@@ -30,6 +54,9 @@ class App extends Component {
             placeholder="Enter your city" />
           <input type="submit" value="Submit" />
         </form>
+
+        <input type="button" onClick={() => this.getData()} value="Data from localStorage"/>
+        <div>{/* display weather information */}</div>
       </div>
     );
   }

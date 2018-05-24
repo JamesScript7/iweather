@@ -10,11 +10,12 @@ export const loadWeather = (param, dispatch) => {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${paramVal}&APPID=${key}`)
     .then(res => res.json())
     .then(resJson => {
-      console.log(resJson);
-      return {
+      localStorage.setItem('weather', JSON.stringify(resJson));
+      
+      dispatch({
         type: LOAD_WEATHER,
         payload: resJson
-      }
+      });
     })
     .catch(err => {
       return dispatch => {
