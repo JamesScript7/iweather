@@ -29,7 +29,7 @@ class App extends Component {
     if (this.props.data.length > 0) {
       console.log(this.props.data[0]);
 
-      if (this.props.data[0].cod === "404") {
+      if (this.props.data[0].cod === "404" || this.props.data[0].cod === "400") {
         console.log(this.props.data[0].message);
       } else {
         city = this.props.data.map((el, i) => {
@@ -51,7 +51,7 @@ class App extends Component {
         <header className="App-header">
 
           <form className="city-form" onSubmit={(e) => this.handleSubmit(e)}>
-            <label htmlFor="city">Get the Current Weather</label>
+            <label htmlFor="city">Get the Weather Forecast</label>
             <input
               id="city"
               type="text"
@@ -62,14 +62,12 @@ class App extends Component {
         </header>
 
         <main>
-          <div className="current-weather">
-            {this.props.data.length > 0 &&
-              <div>
-                <h4>Today</h4>
-                {city}
-              </div>
-            }
-          </div>
+          {this.props.data.length > 0 &&
+            <div className="current-weather">
+              <h4>Today</h4>
+              {city}
+            </div>
+          }
 
           {this.props.forecast.length > 0 &&
             <div className="forecast-container">
