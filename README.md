@@ -1,6 +1,7 @@
-# A React Weather App
+# iWeather
+## A React Weather App
 
-*Skills:* React, Redux, SCSS, localStorage, isomorphic fetch, and webpack.
+*Skills:* React, Redux, react-materialize, isomorphic-fetch, and localStorage.
 
 A simple React weather app using redux and OpenWeatherMap weather api.
 

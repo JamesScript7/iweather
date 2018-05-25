@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { loadWeather } from './actions';
 import { connect } from 'react-redux';
+import { Button, Card, Row, Col } from 'react-materialize';
 // Styles
 import './css/App.css';
 
@@ -34,11 +35,11 @@ class App extends Component {
         city = this.props.data.map((el, i) => {
           return (
             <div key={i}>
-              <h3>{el.name}</h3>
+              <h5>{el.name}</h5>
               <div>{Math.round((el.main.temp * (9/5)) - 459.67)} F</div>
               <img src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main}/>
               <div>{el.weather[0].description}</div>
-              <div>Wind speed: {el.wind.speed} mph</div>
+              <div>Wind: {el.wind.speed} mph</div>
             </div>
           )
         });
@@ -48,27 +49,26 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Get The Current Weather</h1>
 
           <form className="city-form" onSubmit={(e) => this.handleSubmit(e)}>
-            <label htmlFor="city"></label>
+            <label htmlFor="city">Get the Current Weather</label>
             <input
               id="city"
               type="text"
               name="city"
-              placeholder="Enter your city" />
-            <input type="submit" value="Submit" />
+              placeholder="Enter your city (eg. New York)" />
+            <Button className="waves-effect waves-light btn-small blue lighten-2">Go</Button>
           </form>
         </header>
 
         <main>
           <div className="current-weather">
-            <h2>Today</h2>
+            <h4>Today</h4>
             {this.props.data.length > 0 && city}
           </div>
 
           <div className="forecast-container">
-            <h2>5-day forecast</h2>
+            <h4>5-day forecast</h4>
             <div className="forecast">
               <div>{this.props.data.length > 0 && city}</div>
               <div>{this.props.data.length > 0 && city}</div>
@@ -78,7 +78,7 @@ class App extends Component {
             </div>
           </div>
         </main>
-        
+
       </div>
     );
   }
