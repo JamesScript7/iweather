@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { loadWeather } from './actions';
 import { connect } from 'react-redux';
-
 // Styles
 import './css/App.css';
 
@@ -9,54 +8,54 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const inputVal = e.target.city.value;
-
     this.props.loadWeather(inputVal);
-  }
-  getData() {
-    const data = JSON.parse(localStorage.getItem('weather'));
-    console.log('getData: ', data);
-    // console.log(data.weather[0].description);
-
-    // Display: name, temp, description, id, icon,
-
-    // Data comes in Kelvin??
-    // console.log(this.props.data[0].name);
-    // console.log(this.props.data[0].weather[0].description);
   }
   componentDidMount() {
     // check to see if weather is in localStorage
-    // if so then update the page with the last data
-
+    // if so then update the page with the last data:
+    let data = JSON.parse(localStorage.getItem('weather'));
+    if (localStorage.getItem('weather')) {
+      this.props.loadWeather(data.name);
+    }
   }
   componentWillUnmount() {
-    // This doesn't really remove weather from localStorage!!
-
-    // To remove all keys:
+    // These don't really remove weather from localStorage!!
     // localStorage.clear();
-    localStorage.removeItem('weather');
+    // localStorage.removeItem('weather');
   }
   render() {
     // Handle incoming props.
-    console.log(this.props.data);
+    let city;
+
+    if (this.props.data.length > 0) {
+      console.log(this.props.data[0]);
+      
+      city = this.props.data.map((el, i) => {
+        return <div key={i}>
+          <h2>{el.name}</h2>
+          <div>{Math.round((el.main.temp * (9/5)) - 459.67)} F</div>
+          <img src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main}/>
+          <div>{el.weather[0].description}</div>
+          <div>Wind speed: {el.wind.speed} mph</div>
+        </div>
+      });
+    }
 
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Get The Current Weather</h1>
+          <form className="city-form" onSubmit={(e) => this.handleSubmit(e)}>
+            <label htmlFor="city"></label>
+            <input
+              id="city"
+              type="text"
+              name="city"
+              placeholder="Enter your city" />
+            <input type="submit" value="Submit" />
+          </form>
         </header>
-
-        <form className="city-form" onSubmit={(e) => this.handleSubmit(e)}>
-          <label htmlFor="city"></label>
-          <input
-            id="city"
-            type="text"
-            name="city"
-            placeholder="Enter your city" />
-          <input type="submit" value="Submit" />
-        </form>
-
-        <input type="button" onClick={() => this.getData()} value="Data from localStorage"/>
-        <div>{/* display weather information */}</div>
+        <div>{this.props.data.length > 0 && city}</div>
       </div>
     );
   }
@@ -68,13 +67,11 @@ const mapStateToProps = (state) => {
     data: state.data
   }
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
     loadWeather: city => dispatch(loadWeather(city, dispatch))
   }
 };
-
 const WeatherApp = connect(
   mapStateToProps,
   mapDispatchToProps
