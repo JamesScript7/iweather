@@ -63,20 +63,26 @@ class App extends Component {
 
         <main>
           <div className="current-weather">
-            <h4>Today</h4>
-            {this.props.data.length > 0 && city}
+            {this.props.data.length > 0 &&
+              <div>
+                <h4>Today</h4>
+                {city}
+              </div>
+            }
           </div>
 
-          <div className="forecast-container">
-            <h4>5-day forecast</h4>
-            <div className="forecast">
-              <div>{this.props.data.length > 0 && city}</div>
-              <div>{this.props.data.length > 0 && city}</div>
-              <div>{this.props.data.length > 0 && city}</div>
-              <div>{this.props.data.length > 0 && city}</div>
-              <div>{this.props.data.length > 0 && city}</div>
+          {this.props.forecast.length > 0 &&
+            <div className="forecast-container">
+              <h4>5-day forecast</h4>
+              <div className="forecast">
+                <div>{this.props.data.length > 0 && city}</div>
+                <div>{this.props.data.length > 0 && city}</div>
+                <div>{this.props.data.length > 0 && city}</div>
+                <div>{this.props.data.length > 0 && city}</div>
+                <div>{this.props.data.length > 0 && city}</div>
+              </div>
             </div>
-          </div>
+          }
         </main>
 
       </div>
