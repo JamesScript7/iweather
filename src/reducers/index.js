@@ -25,11 +25,9 @@ export default function(state = initialState, action) {
     case LOAD_FAIL: {
       return {
         ...state,
-        status: false,
-        data: action.payload
+        status: false
       };
     }
-
     default:
       return state;
   }

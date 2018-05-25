@@ -3,16 +3,39 @@
 }
 .App .App-header {
   background-color: royalblue;
-  padding: 8px;
+  padding: 6px;
   color: white;
 }
 .App .App-header .App-title {
   font-size: 1.5em;
 }
+h2 {
+  margin: 0;
+  padding: 10px;
+  background-color: aliceblue;
+}
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+/* FORM */
 .city-form {
   margin: 10px;
   padding: 10px;
 }
 .city-form input {
   padding: 10px;
+}
+/* CURRENT WEATHER */
+.current-weather {
+  padding-bottom: 20px;
+}
+/* FORECAST */
+.forecast {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.forecast div {
+  flex-grow: 1;
 }

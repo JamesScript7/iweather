@@ -25,7 +25,6 @@ class App extends Component {
   render() {
     // Handle incoming props.
     let city;
-
     if (this.props.data.length > 0) {
       console.log(this.props.data[0]);
 
@@ -33,13 +32,15 @@ class App extends Component {
         console.log(this.props.data[0].message);
       } else {
         city = this.props.data.map((el, i) => {
-          return <div key={i}>
-            <h2>{el.name}</h2>
-            <div>{Math.round((el.main.temp * (9/5)) - 459.67)} F</div>
-            <img src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main}/>
-            <div>{el.weather[0].description}</div>
-            <div>Wind speed: {el.wind.speed} mph</div>
-          </div>
+          return (
+            <div key={i}>
+              <h3>{el.name}</h3>
+              <div>{Math.round((el.main.temp * (9/5)) - 459.67)} F</div>
+              <img src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main}/>
+              <div>{el.weather[0].description}</div>
+              <div>Wind speed: {el.wind.speed} mph</div>
+            </div>
+          )
         });
       }
     }
@@ -59,7 +60,25 @@ class App extends Component {
             <input type="submit" value="Submit" />
           </form>
         </header>
-        <div>{this.props.data.length > 0 && city}</div>
+
+        <main>
+          <div className="current-weather">
+            <h2>Today</h2>
+            {this.props.data.length > 0 && city}
+          </div>
+
+          <div className="forecast-container">
+            <h2>5-day forecast</h2>
+            <div className="forecast">
+              <div>{this.props.data.length > 0 && city}</div>
+              <div>{this.props.data.length > 0 && city}</div>
+              <div>{this.props.data.length > 0 && city}</div>
+              <div>{this.props.data.length > 0 && city}</div>
+              <div>{this.props.data.length > 0 && city}</div>
+            </div>
+          </div>
+        </main>
+        
       </div>
     );
   }

@@ -23,7 +23,7 @@ export const loadWeather = (param, dispatch) => {
       return dispatch => {
         dispatch({
           type: LOAD_FAIL,
-          payload: true
+          payload: false
         });
       }
     });
