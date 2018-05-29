@@ -1,15 +1,16 @@
 .App {
+  height: 100vh;
   text-align: center;
+  background-image: url('https://picsum.photos/2048/1536/?random&blur=true');
 }
 .App .App-header {
   font-size: 1.5em;
   color: white;
-  background-color: royalblue;
+  background-color: rgba(65,105,255, 0.7);
 }
 h4 {
   margin: 0;
   padding: 10px;
-  background-color: aliceblue;
 }
 main {
   max-width: 1000px;
@@ -26,11 +27,26 @@ main {
 .city-form input#city {
   display: inline-block;
   width: 300px;
-  margin: 12px 12px 12px 16px;
+  margin: 10px 10px 10px 14px;
 }
 .city-form input#city:focus {
   border-bottom: 1px solid gold;
   box-shadow: 0 1px 0 0 gold;
+}
+/* MOBILE MODE */
+@media only screen and (max-width: 450px) {
+  .App {
+    background-image: url('https://picsum.photos/640/960/?random&blur=true');
+  }
+  .city-form {
+    padding: 0 0 8px 0;
+  }
+  .city-form input#city {
+    margin: 0 0 8px 0;
+  }
+  .btn {
+    width: 90%;
+  }
 }
 /* TODAY'S WEATHER */
 .current-weather {

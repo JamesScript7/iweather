@@ -51,7 +51,9 @@ class App extends Component {
         <header className="App-header">
 
           <form className="city-form" onSubmit={(e) => this.handleSubmit(e)}>
-            <label htmlFor="city">Get the Weather Forecast</label>
+            <label htmlFor="city">
+              {!this.props.status && <span>Get the Weather Forecast:</span>}
+            </label>
             <input
               id="city"
               type="text"
