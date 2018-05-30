@@ -35,11 +35,21 @@ class App extends Component {
         city = this.props.data.map((el, i) => {
           return (
             <div key={i}>
-              <h5>{el.name}</h5>
-              <div>{Math.round((el.main.temp * (9/5)) - 459.67)} F</div>
-              <img src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main}/>
-              <div>{el.weather[0].description}</div>
-              <div>Wind: {el.wind.speed} mph</div>
+              <div>
+                <div className="city-name left-align">{el.name}</div>
+                <div className="temp">{Math.round((el.main.temp * (9/5)) - 459.67)}&#8457;</div>
+              </div>
+              <div className="row z-depth-5">
+                <div className="weather-image-container col s6">
+                  <img className="weather-image" src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main} />
+                </div>
+                <div className="description col s6">
+                  <div className="description-box">
+                    <div>{el.weather[0].description}</div>
+                    <div>Wind: {el.wind.speed} mph</div>
+                  </div>
+                </div>
+              </div>
             </div>
           )
         });
@@ -58,7 +68,7 @@ class App extends Component {
               id="city"
               type="text"
               name="city"
-              placeholder="Enter your city (eg. New York)" />
+              placeholder="Enter your zip code (eg. 10012)" />
             <Button className="waves-effect waves-light btn-small blue lighten-2">Go</Button>
           </form>
         </header>
@@ -66,7 +76,6 @@ class App extends Component {
         <main>
           {this.props.data.length > 0 &&
             <div className="current-weather">
-              <h4>Today</h4>
               {city}
             </div>
           }

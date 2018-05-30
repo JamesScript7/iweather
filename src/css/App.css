@@ -1,7 +1,7 @@
 .App {
   height: 100vh;
   text-align: center;
-  background-image: url('https://picsum.photos/2048/1536/?random&blur=true');
+  background-image: url('https://picsum.photos/2048/1536/?random&blur=true&gravity=south');
 }
 .App .App-header {
   font-size: 1.5em;
@@ -33,24 +33,42 @@ main {
   border-bottom: 1px solid gold;
   box-shadow: 0 1px 0 0 gold;
 }
-/* MOBILE MODE */
-@media only screen and (max-width: 450px) {
-  .App {
-    background-image: url('https://picsum.photos/640/960/?random&blur=true');
-  }
-  .city-form {
-    padding: 0 0 8px 0;
-  }
-  .city-form input#city {
-    margin: 0 0 8px 0;
-  }
-  .btn {
-    width: 90%;
-  }
-}
 /* TODAY'S WEATHER */
 .current-weather {
   padding-bottom: 20px;
+}
+div.city-name {
+  font-size: 1.2em;
+  padding: 8px;
+}
+div.temp {
+  font-size: 11em;
+  display: inline-block;
+  padding: 3px;
+  text-shadow: 2px 2px 4px #454545;
+  color: snow;
+}
+div.row {
+  width: 50%;
+}
+div.description {
+  font-size: 1.5em;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+div.description, div.city-name {
+  text-shadow: 1px 1px 4px #454545;
+  color: snow;
+}
+img.weather-image {
+  display: inline-block;
+  width: 100px;
+}
+div.weather-image-container {
+  text-align: right;
 }
 /* FORECAST */
 .forecast {
@@ -61,4 +79,26 @@ main {
 }
 .forecast div {
   flex-grow: 1;
+}
+/* MOBILE MODE */
+@media only screen and (max-width: 450px) {
+  .App {
+    background-image: url('https://picsum.photos/640/960/?random&blur=true&gravity=south');
+  }
+  .city-form {
+    padding: 0 0 10px 0;
+  }
+  .city-form input#city {
+    margin: 0 0 10px 0;
+    width: 90%;
+  }
+  .btn {
+    width: 90%;
+  }
+  div.temp {
+    font-size: 8em;
+  }
+  div.row {
+    width: 90%;
+  }
 }
