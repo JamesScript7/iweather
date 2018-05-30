@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { loadWeather } from './actions';
 import { connect } from 'react-redux';
-import { Button, Card, Row, Col } from 'react-materialize';
+import { Button, Card } from 'react-materialize';
 // Styles
 import './css/App.css';
 
@@ -9,6 +9,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const inputVal = e.target.city.value;
+
     this.props.loadWeather(inputVal);
   }
   componentDidMount() {
@@ -25,10 +26,8 @@ class App extends Component {
   }
   render() {
     // Handle incoming props.
-    let city;
+    let city, forecast;
     if (this.props.data.length > 0) {
-      console.log(this.props.data[0]);
-
       if (this.props.data[0].cod === "404" || this.props.data[0].cod === "400") {
         console.log(this.props.data[0].message);
       } else {
@@ -51,6 +50,23 @@ class App extends Component {
                 </div>
               </div>
             </div>
+          )
+        });
+
+        forecast = this.props.forecast[0].map((el, i) => {
+          // the weather
+          console.log(el);
+          return (
+            <li key={i}>
+              <Card>
+                <div>{el.dt}</div>
+                <div>{el.dt_txt}</div>
+                <img src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main} />
+                <div>{el.weather[0].description}</div>
+                <div>{Math.round((el.main.temp_max * (9/5)) - 459.67)}</div>
+                <div>{Math.round((el.main.temp_min * (9/5)) - 459.67)}</div>
+              </Card>
+            </li>
           )
         });
       }
@@ -82,14 +98,10 @@ class App extends Component {
 
           {this.props.forecast.length > 0 &&
             <div className="forecast-container">
-              <h4>5-day forecast</h4>
-              <div className="forecast">
-                <div>{this.props.data.length > 0 && city}</div>
-                <div>{this.props.data.length > 0 && city}</div>
-                <div>{this.props.data.length > 0 && city}</div>
-                <div>{this.props.data.length > 0 && city}</div>
-                <div>{this.props.data.length > 0 && city}</div>
-              </div>
+              <h4>5-day Forecast</h4>
+              <ul className="forecast">
+                {forecast}
+              </ul>
             </div>
           }
         </main>

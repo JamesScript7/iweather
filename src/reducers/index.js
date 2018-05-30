@@ -1,4 +1,4 @@
-import { LOAD_WEATHER, LOAD_FAIL, LOAD_FORECAST } from '../actions';
+import { LOAD_WEATHER, LOAD_FAIL } from '../actions';
 
 const initialState = {
   status: false,
@@ -12,14 +12,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         status: true,
-        data: [action.payload]
-      };
-    }
-    case LOAD_FORECAST: {
-      return {
-        ...state,
-        status: true,
-        forecast: [action.payload]
+        data: [action.payload],
+        forecast: [action.forecast]
       };
     }
     case LOAD_FAIL: {
