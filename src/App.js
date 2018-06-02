@@ -12,6 +12,46 @@ class App extends Component {
 
     this.props.loadWeather(inputVal);
   }
+  forecastEngine() {
+    let forecastFromLS = JSON.parse(localStorage.getItem('forecast'));
+    console.log(forecastFromLS);
+    let arr = [];
+    let obj = {};
+    let swtch = false;
+
+    forecastFromLS.list.forEach((el) => {
+      const t = new Date(el.dt * 1000).toString().split(' ')[0];
+      console.log(t);
+
+      if (obj[t] === undefined) {
+        obj[t] = [];
+        obj[t].push(el.main.temp);
+      } else {
+        obj[t].push(el.main.temp);
+      }
+    });
+
+    /*
+    Math.min(...array);
+    Math.man(...array);
+
+    Desired Result:
+    obj = {
+      Fri: {
+        min: 123.4,
+        max: 567.8
+      },
+      Mon: {
+        min: 123.4,
+        max: 567.8
+      }
+    }
+    */
+
+
+    console.log(obj);
+    // return obj;
+  }
   componentDidMount() {
     // Checks localStorage for 'weather' and updates if exists:
     let data = JSON.parse(localStorage.getItem('weather'));
@@ -25,8 +65,9 @@ class App extends Component {
     // localStorage.removeItem('weather');
   }
   render() {
-    // Handle incoming props.
     let city, forecast;
+
+    // Handle incoming props.
     if (this.props.data.length > 0) {
       if (this.props.data[0].cod === "404" || this.props.data[0].cod === "400") {
         console.log(this.props.data[0].message);
@@ -44,8 +85,17 @@ class App extends Component {
                 </div>
                 <div className="description col s6">
                   <div className="description-box">
-                    <div>{el.weather[0].description}</div>
-                    <div>Wind: {el.wind.speed} mph</div>
+                    <div>
+                      <div>{el.weather[0].description}</div>
+                      <span>
+                        high: {Math.round((el.main.temp_max * (9/5)) - 459.67)}
+                      </span>
+                      <span>&nbsp;</span>
+                      <span>
+                        low: {Math.round((el.main.temp_min * (9/5)) - 459.67)}
+                      </span>
+                      </div>
+                    <div>wind: {el.wind.speed} mph</div>
                   </div>
                 </div>
               </div>
@@ -54,15 +104,16 @@ class App extends Component {
         });
 
         forecast = this.props.forecast[0].map((el, i) => {
-          // the weather
-          console.log(el);
+          // console.log(el);
+          const t = new Date(el.dt * 1000).toString().split(' ');
           return (
             <li key={i}>
               <Card>
-                <div>{el.dt}</div>
+                <p>{t[0]}</p>
+                {/*
                 <div>{el.dt_txt}</div>
+                */}
                 <img src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main} />
-                <div>{el.weather[0].description}</div>
                 <div>{Math.round((el.main.temp_max * (9/5)) - 459.67)}</div>
                 <div>{Math.round((el.main.temp_min * (9/5)) - 459.67)}</div>
               </Card>
@@ -71,6 +122,8 @@ class App extends Component {
         });
       }
     }
+
+    this.forecastEngine();
 
     return (
       <div className="App">
@@ -95,16 +148,17 @@ class App extends Component {
               {city}
             </div>
           }
-
+        </main>
+        <section>
           {this.props.forecast.length > 0 &&
             <div className="forecast-container">
-              <h4>5-day Forecast</h4>
-              <ul className="forecast">
-                {forecast}
-              </ul>
+              <div className="city-name center-align">5-day Forecast</div>
+                <ul className="forecast">
+                  {forecast}
+                </ul>
             </div>
           }
-        </main>
+        </section>
 
       </div>
     );

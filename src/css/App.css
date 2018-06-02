@@ -14,8 +14,16 @@ h4 {
   padding: 10px;
 }
 main {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
+}
+.forecast-container {
+  background-color: #192b70;
+  width: 100%;
+}
+ul.forecast {
+  margin: 0 auto;
+  max-width: 1100px;
 }
 /* FORM */
 .city-form {
@@ -43,10 +51,10 @@ div.city-name {
   padding: 10px;
 }
 div.temp {
-  font-size: 11em;
+  font-size: 9em;
   display: inline-block;
   padding: 3px;
-  text-shadow: 2px 2px 4px #454545;
+  text-shadow: 2px 2px 4px #353535;
   color: snow;
 }
 div.row {
@@ -54,7 +62,7 @@ div.row {
 }
 div.description {
   font-size: 1.5em;
-  height: 100px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,7 +77,7 @@ img.weather-image {
   width: 100px;
 }
 div.weather-image-container {
-  text-align: right;
+  text-align: center;
 }
 /* FORECAST */
 .forecast {
@@ -80,6 +88,9 @@ div.weather-image-container {
 }
 .forecast div {
   flex-grow: 1;
+}
+li {
+  margin: 0 0 0 2px;
 }
 /* MOBILE MODE */
 @media only screen and (max-width: 450px) {
@@ -96,10 +107,17 @@ div.weather-image-container {
   .btn {
     width: 90%;
   }
+  div.description {
+    font-size: 1.3em;
+    height: 120px;
+  }
   div.temp {
     font-size: 8em;
   }
   div.row {
     width: 90%;
+  }
+  div.card div.card-content {
+    padding: 6px;
   }
 }
