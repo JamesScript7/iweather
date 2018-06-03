@@ -17,43 +17,59 @@ class App extends Component {
     return Math.round( (kelvin * (9/5)) - absoluteZeroInFahrenheit );
   }
   forecastEngine() {
-    let forecastFromLS = JSON.parse(localStorage.getItem('forecast'));
-    console.log(forecastFromLS);
-    let arr = [];
-    let obj = {};
-    let swtch = false;
+    const forecastFromLS = JSON.parse(localStorage.getItem('forecast'));
+    const result = [];
+    const obj = {};
+    let current = '';
+    // console.log(forecastFromLS);
 
-    forecastFromLS.list.forEach((el) => {
+    forecastFromLS.list.forEach((el, i) => {
       const t = new Date(el.dt * 1000).toString().split(' ')[0];
-      console.log(t);
 
-      if (obj[t] === undefined) {
-        obj[t] = [];
-        obj[t].push(el.main.temp);
+      function initializeKey() {
+        current = t;
+        obj[t] = {};
+        obj[t].temp = [];
+      }
+      function updateObj() {
+        obj[t].day = t;
+        obj[t].temp.push(el.main.temp);
+        obj[t].description = el.weather[0].description;
+        obj[t].icon = el.weather[0].icon;
+      }
+
+      if (i === forecastFromLS.list.length - 1) {
+        // We will push because this means
+        // we have reached the end of the array.
+        updateObj();
+
+        result.push(obj[current]);
+      } else if (i !== 0 && t === current) {
+        // This means we are still on the same day
+        // so we just need to update the temp array.
+        updateObj();
+      } else if (i !== 0 && t !== current) {
+        // push to result because this means
+        // we are on to the next day.
+        result.push(obj[current]);
+
+        initializeKey();
+        updateObj();
       } else {
-        obj[t].push(el.main.temp);
+        // Don't push here because this means
+        // we are at the start of the map i === 0
+        initializeKey();
+        updateObj();
       }
     });
+
+    console.log(result);
 
     /*
     Math.min(...array);
     Math.man(...array);
-
-    Desired Result:
-    obj = {
-      Fri: {
-        min: 123.4,
-        max: 567.8
-      },
-      Mon: {
-        min: 123.4,
-        max: 567.8
-      }
-    }
     */
 
-
-    console.log(obj);
     // return obj;
   }
   componentDidMount() {
