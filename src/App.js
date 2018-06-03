@@ -21,7 +21,6 @@ class App extends Component {
     const result = [];
     const obj = {};
     let current = '';
-    // console.log(forecastFromLS);
 
     forecastFromLS.list.forEach((el, i) => {
       const t = new Date(el.dt * 1000).toString().split(' ')[0];
@@ -39,45 +38,39 @@ class App extends Component {
       }
 
       if (i === forecastFromLS.list.length - 1) {
-        // We will push because this means
-        // we have reached the end of the array.
+        // Push current at end of the array.
         updateObj();
+        obj[current].min = Math.min(...obj[current].temp);
+        obj[current].max = Math.max(...obj[current].temp);
 
         result.push(obj[current]);
       } else if (i !== 0 && t === current) {
-        // This means we are still on the same day
-        // so we just need to update the temp array.
+        // Continue to update temp array.
         updateObj();
       } else if (i !== 0 && t !== current) {
         // push to result because this means
         // we are on to the next day.
-        result.push(obj[current]);
+        obj[current].min = Math.min(...obj[current].temp);
+        obj[current].max = Math.max(...obj[current].temp);
 
+        result.push(obj[current]);
         initializeKey();
         updateObj();
       } else {
-        // Don't push here because this means
-        // we are at the start of the map i === 0
+        // i === 0
         initializeKey();
         updateObj();
       }
     });
 
-    console.log(result);
-
-    /*
-    Math.min(...array);
-    Math.man(...array);
-    */
-
-    // return obj;
+    return result;
   }
   componentDidMount() {
     // Checks localStorage for 'weather' and updates if exists:
     let data = JSON.parse(localStorage.getItem('weather'));
-    // if (localStorage.getItem('weather')) {
-    //   this.props.loadWeather(data.name);
-    // }
+    if (localStorage.getItem('weather')) {
+      this.props.loadWeather(data.name);
+    }
   }
   componentWillUnmount() {
     // Why don't these remove weather from localStorage
@@ -128,28 +121,25 @@ class App extends Component {
           )
         });
 
-        forecast = this.props.forecast[0].map((el, i) => {
+        forecast = this.forecastEngine().map((el, i) => {
           const day = new Date(el.dt * 1000).toString().split(' ')[0];
-          const imgSrc = `http://openweathermap.org/img/w/${el.weather[0].icon}.png`;
+          const imgSrc = `http://openweathermap.org/img/w/${el.icon}.png`;
 
-          return (
-            <li key={i}>
-              <Card>
-                <p>{day}</p>
-                {/*
-                <div>{el.dt_txt}</div>
-                */}
-                <img src={imgSrc} alt={el.weather[0].main} />
-                <div>{this.kelvinToFahrenheit(el.main.temp_max)}</div>
-                <div>{this.kelvinToFahrenheit(el.main.temp_min)}</div>
-              </Card>
-            </li>
-          )
+          if (i !== 0) {
+            return (
+              <li key={i}>
+                <Card>
+                  <p>{el.day}</p>
+                  <img src={imgSrc} alt={el.description} />
+                    <div>{this.kelvinToFahrenheit(el.max)}</div>
+                    <div>{this.kelvinToFahrenheit(el.min)}</div>
+                </Card>
+              </li>
+            )
+          }
         });
       }
     }
-
-    this.forecastEngine();
 
     return (
       <div className="App">

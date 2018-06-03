@@ -17,10 +17,6 @@ main {
   max-width: 1100px;
   margin: 0 auto;
 }
-.forecast-container {
-  background-color: #192b70;
-  width: 100%;
-}
 ul.forecast {
   margin: 0 auto;
   max-width: 1100px;
@@ -80,6 +76,9 @@ div.weather-image-container {
   text-align: center;
 }
 /* FORECAST */
+li {
+  margin: 0 0 0 2px;
+}
 .forecast {
   display: flex;
   flex-direction: row;
@@ -89,8 +88,8 @@ div.weather-image-container {
 .forecast div {
   flex-grow: 1;
 }
-li {
-  margin: 0 0 0 2px;
+div.card div.card-content {
+  background-color: rgba(65,105,255, 0.5);
 }
 /* MOBILE MODE */
 @media only screen and (max-width: 450px) {
