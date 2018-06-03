@@ -69,6 +69,7 @@ class App extends Component {
     // Checks localStorage for 'weather' and updates if exists:
     let data = JSON.parse(localStorage.getItem('weather'));
     if (localStorage.getItem('weather')) {
+      console.log(data);
       this.props.loadWeather(data.name);
     }
   }
@@ -86,6 +87,7 @@ class App extends Component {
     if (this.props.data.length > 0) {
       if (this.props.data[0].cod === "404" || this.props.data[0].cod === "400") {
         console.log(this.props.data[0].message);
+        console.log(this.props);
       } else {
         city = this.props.data.map((el, i) => {
           const imgSrc = `http://openweathermap.org/img/w/${el.weather[0].icon}.png`;
@@ -168,7 +170,7 @@ class App extends Component {
         </main>
 
         <section>
-          {this.props.forecast.length > 0 &&
+          {(this.props.forecast.length > 0 && this.props.forecast[0] !== undefined) &&
             <div className="forecast-container">
               <div className="city-name center-align">
                 5-day Forecast

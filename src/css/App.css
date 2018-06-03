@@ -88,8 +88,8 @@ li {
 .forecast div {
   flex-grow: 1;
 }
-div.card div.card-content {
-  background-color: rgba(65,105,255, 0.5);
+div.card {
+  background-color: rgba(255,255,255, 0.4);
 }
 /* MOBILE MODE */
 @media only screen and (max-width: 450px) {
