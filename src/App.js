@@ -12,6 +12,10 @@ class App extends Component {
 
     this.props.loadWeather(inputVal);
   }
+  kelvinToFahrenheit(kelvin) {
+    const absoluteZeroInFahrenheit = 459.67;
+    return Math.round( (kelvin * (9/5)) - absoluteZeroInFahrenheit );
+  }
   forecastEngine() {
     let forecastFromLS = JSON.parse(localStorage.getItem('forecast'));
     console.log(forecastFromLS);
@@ -60,7 +64,9 @@ class App extends Component {
     // }
   }
   componentWillUnmount() {
-    // Why don't these remove weather from localStorage!!
+    // Why don't these remove weather from localStorage
+    // or do we even need them to be removed?
+
     // localStorage.clear();
     // localStorage.removeItem('weather');
   }
@@ -73,28 +79,31 @@ class App extends Component {
         console.log(this.props.data[0].message);
       } else {
         city = this.props.data.map((el, i) => {
+          const imgSrc = `http://openweathermap.org/img/w/${el.weather[0].icon}.png`;
+
           return (
             <div key={i}>
               <div>
                 <div className="city-name left-align">{el.name}</div>
-                <div className="temp">{Math.round((el.main.temp * (9/5)) - 459.67)}&#8457;</div>
+                <div className="temp">{this.kelvinToFahrenheit(el.main.temp)}&#8457;</div>
               </div>
               <div className="row z-depth-5">
                 <div className="weather-image-container col s6">
-                  <img className="weather-image" src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main} />
+                  <img className="weather-image" src={imgSrc} alt={el.weather[0].main} />
                 </div>
+
                 <div className="description col s6">
                   <div className="description-box">
                     <div>
                       <div>{el.weather[0].description}</div>
                       <span>
-                        high: {Math.round((el.main.temp_max * (9/5)) - 459.67)}
+                        high: {this.kelvinToFahrenheit(el.main.temp_max)}
                       </span>
                       <span>&nbsp;</span>
                       <span>
-                        low: {Math.round((el.main.temp_min * (9/5)) - 459.67)}
+                        low: {this.kelvinToFahrenheit(el.main.temp_min)}
                       </span>
-                      </div>
+                    </div>
                     <div>wind: {el.wind.speed} mph</div>
                   </div>
                 </div>
@@ -104,18 +113,19 @@ class App extends Component {
         });
 
         forecast = this.props.forecast[0].map((el, i) => {
-          // console.log(el);
-          const t = new Date(el.dt * 1000).toString().split(' ');
+          const day = new Date(el.dt * 1000).toString().split(' ')[0];
+          const imgSrc = `http://openweathermap.org/img/w/${el.weather[0].icon}.png`;
+
           return (
             <li key={i}>
               <Card>
-                <p>{t[0]}</p>
+                <p>{day}</p>
                 {/*
                 <div>{el.dt_txt}</div>
                 */}
-                <img src={`http://openweathermap.org/img/w/${el.weather[0].icon}.png`} alt={el.weather[0].main} />
-                <div>{Math.round((el.main.temp_max * (9/5)) - 459.67)}</div>
-                <div>{Math.round((el.main.temp_min * (9/5)) - 459.67)}</div>
+                <img src={imgSrc} alt={el.weather[0].main} />
+                <div>{this.kelvinToFahrenheit(el.main.temp_max)}</div>
+                <div>{this.kelvinToFahrenheit(el.main.temp_min)}</div>
               </Card>
             </li>
           )
@@ -128,10 +138,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-
           <form className="city-form" onSubmit={(e) => this.handleSubmit(e)}>
             <label htmlFor="city">
-              {!this.props.status && <span>Get the Weather Forecast:</span>}
+              {!this.props.status &&
+                <span>Get the Weather Forecast:</span>
+              }
             </label>
             <input
               id="city"
@@ -149,17 +160,19 @@ class App extends Component {
             </div>
           }
         </main>
+
         <section>
           {this.props.forecast.length > 0 &&
             <div className="forecast-container">
-              <div className="city-name center-align">5-day Forecast</div>
-                <ul className="forecast">
-                  {forecast}
-                </ul>
+              <div className="city-name center-align">
+                5-day Forecast
+              </div>
+              <ul className="forecast">
+                {forecast}
+              </ul>
             </div>
           }
         </section>
-
       </div>
     );
   }
