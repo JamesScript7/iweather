@@ -17,10 +17,6 @@ main {
   max-width: 1100px;
   margin: 0 auto;
 }
-ul.forecast {
-  margin: 0 auto;
-  max-width: 1100px;
-}
 /* FORM */
 .city-form {
   display: inline-block;
@@ -39,13 +35,6 @@ ul.forecast {
   box-shadow: 0 1px 0 0 gold;
 }
 /* TODAY'S WEATHER */
-.current-weather {
-  padding-bottom: 20px;
-}
-div.city-name {
-  font-size: 1.2em;
-  padding: 10px;
-}
 div.temp {
   font-size: 9em;
   display: inline-block;
@@ -57,7 +46,7 @@ div.row {
   width: 50%;
 }
 div.description {
-  font-size: 1.5em;
+  font-size: 1.3em;
   height: 110px;
   display: flex;
   flex-direction: column;
@@ -74,22 +63,6 @@ img.weather-image {
 }
 div.weather-image-container {
   text-align: center;
-}
-/* FORECAST */
-li {
-  margin: 0 0 0 2px;
-}
-.forecast {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.forecast div {
-  flex-grow: 1;
-}
-div.card {
-  background-color: rgba(255,255,255, 0.4);
 }
 /* MOBILE MODE */
 @media only screen and (max-width: 450px) {
@@ -115,8 +88,6 @@ div.card {
   }
   div.row {
     width: 90%;
-  }
-  div.card div.card-content {
-    padding: 6px;
+    margin-bottom: 0;
   }
 }

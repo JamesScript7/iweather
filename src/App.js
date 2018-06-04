@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { loadWeather } from './actions';
 import { connect } from 'react-redux';
-import { Button, Card } from 'react-materialize';
+import { Button } from 'react-materialize';
+import Forecast from './components/Forecast';
 // Styles
 import './css/App.css';
 
@@ -79,7 +80,7 @@ class App extends Component {
     // localStorage.removeItem('forecast');
   }
   render() {
-    let city, forecast;
+    let city;
 
     // Handle incoming props.
     if (this.props.data.length > 0) {
@@ -119,23 +120,6 @@ class App extends Component {
             </div>
           )
         });
-
-        forecast = this.forecastEngine().map((el, i) => {
-          const imgSrc = `http://openweathermap.org/img/w/${el.icon}.png`;
-
-          if (i !== 0) {
-            return (
-              <li key={i}>
-                <Card>
-                  <p>{el.day}</p>
-                  <img src={imgSrc} alt={el.description} />
-                  <div>{this.kelvinToFahrenheit(el.max)}</div>
-                  <div>{this.kelvinToFahrenheit(el.min)}</div>
-                </Card>
-              </li>
-            )
-          }
-        });
       }
     }
 
@@ -167,14 +151,8 @@ class App extends Component {
 
         <section>
           {(this.props.forecast.length > 0 && this.props.forecast[0] !== undefined) &&
-            <div className="forecast-container">
-              <div className="city-name center-align">
-                5-day Forecast
-              </div>
-              <ul className="forecast">
-                {forecast}
-              </ul>
-            </div>
+            <Forecast forecastEngine={this.forecastEngine}
+              kelvinToFahrenheit={this.kelvinToFahrenheit} />
           }
         </section>
       </div>
