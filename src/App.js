@@ -3,6 +3,7 @@ import { loadWeather } from './actions';
 import { connect } from 'react-redux';
 import { Button } from 'react-materialize';
 import Forecast from './components/Forecast';
+// import City from './components/City';
 // Styles
 import './css/App.css';
 
