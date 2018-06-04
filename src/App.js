@@ -80,9 +80,8 @@ class App extends Component {
     // localStorage.removeItem('forecast');
   }
   render() {
-    let city;
-
     // Handle incoming props.
+    let city;
     if (this.props.data.length > 0) {
       if (this.props.data[0].cod === "404" || this.props.data[0].cod === "400") {
         console.log(this.props.data[0].message);
@@ -151,7 +150,8 @@ class App extends Component {
 
         <section>
           {(this.props.forecast.length > 0 && this.props.forecast[0] !== undefined) &&
-            <Forecast forecastEngine={this.forecastEngine}
+            <Forecast
+              forecastEngine={this.forecastEngine}
               kelvinToFahrenheit={this.kelvinToFahrenheit} />
           }
         </section>

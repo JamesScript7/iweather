@@ -28,6 +28,6 @@ div.card {
 /* MOBILE MODE */
 @media only screen and (max-width: 450px) {
   div.card div.card-content {
-    padding: 6px;
+    padding: 7px;
   }
 }
