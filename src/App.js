@@ -66,19 +66,17 @@ class App extends Component {
     return result;
   }
   componentDidMount() {
-    // Checks localStorage for 'weather' and updates if exists:
-    let data = JSON.parse(localStorage.getItem('weather'));
-    if (localStorage.getItem('weather')) {
-      console.log(data);
-      this.props.loadWeather(data.name);
+    // Checks localStorage for 'param' and updates if exists:
+    const searchParam = localStorage.getItem('param');
+
+    if (searchParam) {
+      this.props.loadWeather(searchParam);
     }
   }
   componentWillUnmount() {
-    // Why don't these remove weather from localStorage
-    // or do we even need them to be removed?
-
     // localStorage.clear();
     // localStorage.removeItem('weather');
+    // localStorage.removeItem('forecast');
   }
   render() {
     let city, forecast;
@@ -87,7 +85,6 @@ class App extends Component {
     if (this.props.data.length > 0) {
       if (this.props.data[0].cod === "404" || this.props.data[0].cod === "400") {
         console.log(this.props.data[0].message);
-        console.log(this.props);
       } else {
         city = this.props.data.map((el, i) => {
           const imgSrc = `http://openweathermap.org/img/w/${el.weather[0].icon}.png`;
@@ -124,7 +121,6 @@ class App extends Component {
         });
 
         forecast = this.forecastEngine().map((el, i) => {
-          const day = new Date(el.dt * 1000).toString().split(' ')[0];
           const imgSrc = `http://openweathermap.org/img/w/${el.icon}.png`;
 
           if (i !== 0) {
@@ -133,8 +129,8 @@ class App extends Component {
                 <Card>
                   <p>{el.day}</p>
                   <img src={imgSrc} alt={el.description} />
-                    <div>{this.kelvinToFahrenheit(el.max)}</div>
-                    <div>{this.kelvinToFahrenheit(el.min)}</div>
+                  <div>{this.kelvinToFahrenheit(el.max)}</div>
+                  <div>{this.kelvinToFahrenheit(el.min)}</div>
                 </Card>
               </li>
             )

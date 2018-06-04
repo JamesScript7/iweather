@@ -6,6 +6,7 @@ export const loadWeather = (param, dispatch) => {
   const weatherParam = param;
   const key = process.env.REACT_APP_API_KEY;
   const url = `http://api.openweathermap.org/data/2.5/weather?zip=${weatherParam}&APPID=${key}`;
+  localStorage.setItem('param', param);
 
   return dispatch => {
     fetch(url)
@@ -16,8 +17,8 @@ export const loadWeather = (param, dispatch) => {
       fetch(`http://api.openweathermap.org/data/2.5/forecast?zip=${weatherParam}&APPID=${key}`)
       .then(res => res.json())
       .then(resJsonForecast => {
-        console.log(resJsonForecast);
         localStorage.setItem('forecast', JSON.stringify(resJsonForecast));
+
         dispatch({
           type: LOAD_WEATHER,
           payload: resJson,
