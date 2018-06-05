@@ -34,36 +34,6 @@ main {
   border-bottom: 1px solid gold;
   box-shadow: 0 1px 0 0 gold;
 }
-/* TODAY'S WEATHER */
-div.temp {
-  font-size: 9em;
-  display: inline-block;
-  padding: 3px;
-  text-shadow: 2px 2px 4px #353535;
-  color: snow;
-}
-div.row {
-  width: 50%;
-}
-div.description {
-  font-size: 1.3em;
-  height: 110px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-}
-div.description, div.city-name {
-  text-shadow: 1px 1px 4px #454545;
-  color: snow;
-}
-img.weather-image {
-  display: inline-block;
-  width: 100px;
-}
-div.weather-image-container {
-  text-align: center;
-}
 /* MOBILE MODE */
 @media only screen and (max-width: 450px) {
   .App {
@@ -78,16 +48,5 @@ div.weather-image-container {
   }
   .btn {
     width: 90%;
-  }
-  div.description {
-    font-size: 1.3em;
-    height: 120px;
-  }
-  div.temp {
-    font-size: 8em;
-  }
-  div.row {
-    width: 90%;
-    margin-bottom: 0;
   }
 }

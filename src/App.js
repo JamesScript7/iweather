@@ -3,7 +3,7 @@ import { loadWeather } from './actions';
 import { connect } from 'react-redux';
 import { Button } from 'react-materialize';
 import Forecast from './components/Forecast';
-// import City from './components/City';
+import City from './components/City';
 // Styles
 import './css/App.css';
 
@@ -81,48 +81,6 @@ class App extends Component {
     // localStorage.removeItem('forecast');
   }
   render() {
-    // Handle incoming props.
-    let city;
-    if (this.props.data.length > 0) {
-      if (this.props.data[0].cod === "404" || this.props.data[0].cod === "400") {
-        console.log(this.props.data[0].message);
-      } else {
-        city = this.props.data.map((el, i) => {
-          const imgSrc = `http://openweathermap.org/img/w/${el.weather[0].icon}.png`;
-
-          return (
-            <div key={i}>
-              <div>
-                <div className="city-name left-align">{el.name}</div>
-                <div className="temp">{this.kelvinToFahrenheit(el.main.temp)}&#8457;</div>
-              </div>
-              <div className="row z-depth-5">
-                <div className="weather-image-container col s6">
-                  <img className="weather-image" src={imgSrc} alt={el.weather[0].main} />
-                </div>
-
-                <div className="description col s6">
-                  <div className="description-box">
-                    <div>
-                      <div>{el.weather[0].description}</div>
-                      <span>
-                        high: {this.kelvinToFahrenheit(el.main.temp_max)}
-                      </span>
-                      <span>&nbsp;</span>
-                      <span>
-                        low: {this.kelvinToFahrenheit(el.main.temp_min)}
-                      </span>
-                    </div>
-                    <div>wind: {el.wind.speed} mph</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
-        });
-      }
-    }
-
     return (
       <div className="App">
         <header className="App-header">
@@ -142,10 +100,10 @@ class App extends Component {
         </header>
 
         <main>
-          {this.props.data.length > 0 &&
-            <div className="current-weather">
-              {city}
-            </div>
+          {(this.props.data.length > 0 && this.props.data[0].cod !== '400') &&
+            <City
+              data={this.props.data}
+              kelvinToFahrenheit={this.kelvinToFahrenheit} />
           }
         </main>
 
