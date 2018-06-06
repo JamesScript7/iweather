@@ -1,5 +1,5 @@
 .App {
-  height: 100vh;
+  height: 100%;
   text-align: center;
   background-image: url('https://picsum.photos/2048/1536/?random&blur=true&gravity=south');
 }
