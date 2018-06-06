@@ -17,11 +17,11 @@ A React weather app with Redux and OpenWeatherMap API.
 
 *Screenshot Desktop:*
 
-![iWeather desktop screenshot](https://raw.githubusercontent.com/JamesScript7/random-quote-machine/master/images/screenshot.png)
+![iWeather desktop screenshot](https://raw.githubusercontent.com/JamesScript7/iweather/master/images/screenshot.png)
 
 *Screenshot Mobile:*
 
-![iWeather mobile  screenshot](https://raw.githubusercontent.com/JamesScript7/random-quote-machine/master/images/screenshot-mobile.png)
+![iWeather mobile  screenshot](https://raw.githubusercontent.com/JamesScript7/iweather/master/images/screenshot-mobile.png)
 
 ```
 npm i
