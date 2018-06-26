@@ -11,9 +11,17 @@ A React weather app with Redux and OpenWeatherMap API.
 
 * Background changes to a random blurred image
 
-*Skills:* React, Redux, react-materialize, isomorphic-fetch, OpenWeatherMap API, and localStorage.
+**SKILLS:** React, Redux, react-materialize, isomorphic-fetch, OpenWeatherMap API, and localStorage.
 
 [Link to the webpage!](http://i-weather.surge.sh/)
+
+To start the app:
+
+```
+npm i
+
+npm run react
+```
 
 *Screenshot Desktop:*
 
@@ -22,9 +30,3 @@ A React weather app with Redux and OpenWeatherMap API.
 *Screenshot Mobile:*
 
 ![iWeather mobile  screenshot](https://raw.githubusercontent.com/JamesScript7/iweather/master/images/screenshot-mobile.png)
-
-```
-npm i
-
-npm run react
-```
