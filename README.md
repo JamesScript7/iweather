@@ -15,14 +15,6 @@ A React weather app with Redux and OpenWeatherMap API.
 
 [Link to the webpage!](http://i-weather.surge.sh/)
 
-To start the app:
-
-```
-npm i
-
-npm run react
-```
-
 *Screenshot Desktop:*
 
 ![iWeather desktop screenshot](https://raw.githubusercontent.com/JamesScript7/iweather/master/images/screenshot.png)
@@ -30,3 +22,11 @@ npm run react
 *Screenshot Mobile:*
 
 ![iWeather mobile  screenshot](https://raw.githubusercontent.com/JamesScript7/iweather/master/images/screenshot-mobile.png)
+
+To start the App:
+
+```
+npm i
+
+npm run react
+```
