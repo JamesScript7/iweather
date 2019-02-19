@@ -8,7 +8,7 @@ class City extends Component {
       <div className="current-weather">
         {
           this.props.data.map((el, i) => {
-            const imgSrc = `http://openweathermap.org/img/w/${el.weather[0].icon}.png`;
+            const imgSrc = `https://openweathermap.org/img/w/${el.weather[0].icon}.png`;
 
             return (
               <div key={i}>

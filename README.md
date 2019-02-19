@@ -13,7 +13,7 @@ A React weather app with Redux and OpenWeatherMap API.
 
 **SKILLS:** React, Redux, react-materialize, isomorphic-fetch, OpenWeatherMap API, and localStorage.
 
-[Link to the webpage!](http://i-weather.surge.sh/)
+[Link to the webpage!](https://i-weather.surge.sh/)
 
 *Screenshot Desktop:*
 

@@ -13,7 +13,7 @@ class Forecast extends Component {
         <ul className="forecast">
           {
             this.props.forecastEngine().map((el, i) => {
-              const imgSrc = `http://openweathermap.org/img/w/${el.icon}.png`;
+              const imgSrc = `https://openweathermap.org/img/w/${el.icon}.png`;
 
               if (this.props.forecastEngine().length === 5 || i !== 0) {
                 return (
@@ -26,6 +26,8 @@ class Forecast extends Component {
                     </Card>
                   </li>
                 )
+              } else {
+                return null;
               }
             })
           }
